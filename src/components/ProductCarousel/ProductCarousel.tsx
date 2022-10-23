@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ChevronLeft from "../../assets/chevron-left.svg";
-import ChevronRight from "../../assets/chevron-right.svg";
 import CircleActive from "../../assets/circle-fill.svg";
 import CircleOutline from "../../assets/circle-outline.svg";
+import CarouselArrow from "../CarouselArrow/CarouselArrow";
+import ProductCaption from "../ProductCaption/ProductCaption";
 import { carouselData } from "./CarouselData";
 
 const ProductCarousel = () => {
@@ -21,42 +21,9 @@ const ProductCarousel = () => {
         className="object-cover object-center h-full w-full brightness-90"
         data-testid="product-img"
       />
-      <div className="absolute top-1/2 translate-y-[-50%] left-40">
-        <h2
-          className="text-6xl text-white font-semibold mb-1"
-          data-testid="product-name"
-        >
-          {carouselData[index].name}
-        </h2>
-        <p
-          className="text-xl text-white font-medium"
-          data-testid="product-caption"
-        >
-          {carouselData[index].caption}
-        </p>
-        <button
-          type="button"
-          className="bg-white font-semibold tracking-widest px-8 py-5 mt-4"
-        >
-          BUY NOW
-        </button>
-      </div>
-      <button
-        type="button"
-        onClick={prevImg}
-        className="absolute top-1/2 translate-y-[-50%] left-4 w-14 h-14"
-        data-testid="prev-btn"
-      >
-        <img src={ChevronLeft} alt="" />
-      </button>
-      <button
-        type="button"
-        onClick={nextImg}
-        className="absolute top-1/2 translate-y-[-50%] right-4 w-14 h-14"
-        data-testid="next-btn"
-      >
-        <img src={ChevronRight} alt="" />
-      </button>
+      <ProductCaption product={carouselData[index]} />
+      <CarouselArrow onClick={prevImg} direction="left" />
+      <CarouselArrow onClick={nextImg} direction="right" />
       <div
         className="absolute left-1/2 translate-x-[-50%] bottom-3 flex gap-2"
         data-testid="indicators"
