@@ -5,17 +5,17 @@ import RamaM60Tank from "../../assets/imgs/rama-m60-tank.jpeg";
 export const carouselData = [
   {
     name: "Dalco 959 Mini",
-    caption: "A high-end Porsche 959 inspired 60",
+    desc: "A high-end Porsche 959 inspired 60",
     img: Dalco959Mini,
   },
   {
     name: "2000 Mini SE",
-    caption: "A premium 60% inspired by a piece of JDM automotive history",
+    desc: "A premium 60% inspired by a piece of JDM automotive history",
     img: HE2000MiniSE,
   },
   {
     name: "RAMA WORKS M60-A TANK",
-    caption: "Limited edition M60-A made of full brass",
+    desc: "Limited edition M60-A made of full brass",
     img: RamaM60Tank,
   },
 ];

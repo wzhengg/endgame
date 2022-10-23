@@ -9,9 +9,15 @@ jest.mock("../CarouselArrow/CarouselArrow", () => () => (
   <button type="button" data-testid="arrow-btns" />
 ));
 
+const data = [
+  { name: "product 1", desc: "desc", img: "" },
+  { name: "product 2", desc: "desc", img: "" },
+  { name: "product 3", desc: "desc", img: "" },
+];
+
 describe("featured products carousel", () => {
   test("renders product carousel", () => {
-    render(<ProductCarousel />);
+    render(<ProductCarousel data={data} />);
 
     const productImg = screen.getByTestId("product-img");
     const productCaption = screen.getByTestId("product-caption");
