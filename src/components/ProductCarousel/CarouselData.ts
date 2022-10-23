@@ -1,6 +1,6 @@
-import Dalco959Mini from "../../assets/dalco-959-mini-bottom.jpeg";
-import HE2000MiniSE from "../../assets/2000-mini-se.webp";
-import RamaM60Tank from "../../assets/rama-m60-tank.jpeg";
+import Dalco959Mini from "../../assets/imgs/dalco-959-mini-bottom.jpeg";
+import HE2000MiniSE from "../../assets/imgs/2000-mini-se.webp";
+import RamaM60Tank from "../../assets/imgs/rama-m60-tank.jpeg";
 
 export const carouselData = [
   {

@@ -1,5 +1,5 @@
-import ChevronLeft from "../../assets/chevron-left.svg";
-import ChevronRight from "../../assets/chevron-right.svg";
+import ChevronLeft from "../../assets/icons/chevron-left.svg";
+import ChevronRight from "../../assets/icons/chevron-right.svg";
 
 type ArrowProps = {
   onClick: () => void;

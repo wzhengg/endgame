@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CircleActive from "../../assets/circle-fill.svg";
-import CircleOutline from "../../assets/circle-outline.svg";
+import CircleActive from "../../assets/icons/circle-fill.svg";
+import CircleOutline from "../../assets/icons/circle-outline.svg";
 import CarouselArrow from "../CarouselArrow/CarouselArrow";
 import ProductCaption from "../ProductCaption/ProductCaption";
 import { carouselData } from "./CarouselData";

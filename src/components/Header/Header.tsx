@@ -1,5 +1,5 @@
-import AccountIcon from "../../assets/account-outline.svg";
-import CartIcon from "../../assets/cart-outline.svg";
+import AccountIcon from "../../assets/icons/account-outline.svg";
+import CartIcon from "../../assets/icons/cart-outline.svg";
 
 const Header = () => {
   return (
