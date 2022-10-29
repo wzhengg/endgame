@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import ProductCard from "../ProductCard/ProductCard";
 
 type GridProps = {
   data: {
@@ -42,19 +43,7 @@ const ProductGrid = ({ data }: GridProps) => {
       </div>
       <div className="grid grid-cols-3 gap-6">
         {data[index].products.map((product, i) => (
-          <div
-            key={i}
-            data-testid="product-card"
-            className="flex flex-col items-center gap-4 min-h-full cursor-pointer"
-          >
-            <img src={product.imgs[0]} alt="" />
-            <h4 className="text-xs font-medium tracking-widest text-gray-600">
-              {product.name.toUpperCase()}
-            </h4>
-            <p className="text-xs tracking-wider text-gray-600">
-              {formatter.format(product.price)}
-            </p>
-          </div>
+          <ProductCard product={product} formatter={formatter} key={i} />
         ))}
       </div>
     </div>
