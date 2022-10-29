@@ -1,32 +1,37 @@
 import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ProductGrid from "./ProductGrid";
+
+jest.mock("../ProductCard/ProductCard", () => () => (
+  <div data-testid="product-card" />
+));
 
 const fakeData = [
   {
-    category: "category 1",
+    category: "foo",
     products: [
       {
-        name: "p1",
+        name: "foo1",
         price: 1,
         imgs: [""],
       },
       {
-        name: "p2",
+        name: "foo2",
         price: 2,
         imgs: [""],
       },
       {
-        name: "p3",
+        name: "foo3",
         price: 3,
         imgs: [""],
       },
     ],
   },
   {
-    category: "category 2",
+    category: "bar",
     products: [
       {
-        name: "product 1",
+        name: "bar1",
         price: 1,
         imgs: [""],
       },
@@ -47,5 +52,15 @@ describe("product grid", () => {
     expect(heading).toBeInTheDocument();
     expect(categoryBtns).toHaveLength(2);
     expect(productCards).toHaveLength(3);
+  });
+
+  test("changes products when another category is selected", () => {
+    render(<ProductGrid data={fakeData} />);
+
+    const btn = screen.getByRole("button", { name: "BAR" });
+    userEvent.click(btn);
+    const productCards = screen.getAllByTestId("product-card");
+
+    expect(productCards).toHaveLength(1);
   });
 });
