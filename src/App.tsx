@@ -5,6 +5,7 @@ import "./App.scss";
 import { carouselData } from "./components/carousel/CarouselData";
 import ProductGrid from "./components/product-grid/ProductGrid/ProductGrid";
 import { products } from "./components/product-grid/FeaturedProducts";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <ProductCarousel data={carouselData} />
       <ProductGrid data={products} />
+      <Footer />
     </div>
   );
 }
