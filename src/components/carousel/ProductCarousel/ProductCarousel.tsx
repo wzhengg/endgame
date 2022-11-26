@@ -7,23 +7,22 @@ import ProductCaption from "../ProductCaption/ProductCaption";
 type CarouselProps = {
   data: {
     name: string;
-    desc: string;
-    img: string;
+    description: string;
+    image: string;
   }[];
 };
 
 const ProductCarousel = ({ data }: CarouselProps) => {
   const [index, setIndex] = useState(0);
 
-  const prevImg = () =>
-    setIndex(index === 0 ? data.length - 1 : index - 1);
+  const prevImg = () => setIndex(index === 0 ? data.length - 1 : index - 1);
   const nextImg = () => setIndex((index + 1) % data.length);
   const goToImg = (index: number) => setIndex(index);
 
-  return (
+  return data.length !== 0 ? (
     <div className="relative h-screen w-screen">
       <img
-        src={data[index].img}
+        src={data[index].image}
         alt={data[index].name}
         className="object-cover object-center h-full w-full brightness-90"
         data-testid="product-img"
@@ -47,6 +46,10 @@ const ProductCarousel = ({ data }: CarouselProps) => {
         ))}
       </div>
     </div>
+  ) : (
+    <h3 className="w-full font-semibold tracking-widest text-gray-700 text-center my-6">
+      LOADING...
+    </h3>
   );
 };
 
