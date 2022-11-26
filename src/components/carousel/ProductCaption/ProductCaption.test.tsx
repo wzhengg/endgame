@@ -3,7 +3,7 @@ import ProductCaption from "./ProductCaption";
 
 const fakeProduct = {
   name: "foo",
-  desc: "bar",
+  description: "bar",
 };
 
 describe("product caption", () => {
