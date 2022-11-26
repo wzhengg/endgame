@@ -10,9 +10,9 @@ jest.mock("../CarouselArrow/CarouselArrow", () => () => (
 ));
 
 const data = [
-  { name: "product 1", desc: "desc", img: "" },
-  { name: "product 2", desc: "desc", img: "" },
-  { name: "product 3", desc: "desc", img: "" },
+  { name: "product 1", description: "desc", image: "" },
+  { name: "product 2", description: "desc", image: "" },
+  { name: "product 3", description: "desc", image: "" },
 ];
 
 describe("featured products carousel", () => {
@@ -28,5 +28,11 @@ describe("featured products carousel", () => {
     expect(productCaption).toBeInTheDocument();
     expect(btns).toHaveLength(2);
     expect(indicators).toBeInTheDocument();
+  });
+
+  test("renders loading screen when there's no data", () => {
+    render(<ProductCarousel data={[]} />);
+    const loadingText = screen.getByRole("heading", { name: "LOADING..." });
+    expect(loadingText).toBeInTheDocument();
   });
 });
