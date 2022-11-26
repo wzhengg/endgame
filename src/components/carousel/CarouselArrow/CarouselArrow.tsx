@@ -11,7 +11,9 @@ const CarouselArrow = ({ onClick, direction }: ArrowProps) => {
     <button
       type="button"
       onClick={onClick}
-      className={`absolute top-1/2 translate-y-[-50%] ${direction}-4 w-14 h-14`}
+      className={`absolute top-1/2 translate-y-[-50%] ${
+        direction === "left" ? "left-4" : "right-4"
+      } w-14 h-14`}
     >
       <img src={direction === "left" ? ChevronLeft : ChevronRight} alt="" />
     </button>
