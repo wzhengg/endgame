@@ -1,14 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
-import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  category: string;
-  images: string[];
-};
+class Product {
+  constructor(
+    readonly id: string,
+    readonly name: string,
+    readonly price: number,
+    readonly category: string,
+    readonly images: string[]
+  ) {}
+}
 
 const ProductsLayout = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,16 +24,18 @@ const ProductsLayout = () => {
   const getProducts = async () => {
     try {
       const newProducts: Product[] = [];
-      const querySnapshot = (await getDocs(
-        collection(db, "products")
-      )) as QuerySnapshot<{
-        name: string;
-        price: number;
-        category: string;
-        images: string[];
-      }>;
+      const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
-        newProducts.push({ id: doc.id, ...doc.data() });
+        const product = doc.data();
+        newProducts.push(
+          new Product(
+            doc.id,
+            product.name,
+            product.price,
+            product.category,
+            product.images
+          )
+        );
       });
       setProducts(newProducts);
     } catch (err) {
