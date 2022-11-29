@@ -2,7 +2,7 @@ type Props = {
   product: {
     name: string;
     price: number;
-    imgs: string[];
+    images: string[];
   };
   formatter: Intl.NumberFormat;
 };
@@ -10,7 +10,7 @@ type Props = {
 const ProductCard = ({ product, formatter }: Props) => {
   return (
     <div className="flex flex-col items-center gap-4 cursor-pointer">
-      <img src={product.imgs[0]} alt="" />
+      <img src={product.images[0]} alt="" />
       <h4 className="text-xs font-medium tracking-widest text-gray-600">
         {product.name.toUpperCase()}
       </h4>
