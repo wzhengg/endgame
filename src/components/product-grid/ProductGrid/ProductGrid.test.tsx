@@ -13,17 +13,17 @@ const fakeData = [
       {
         name: "foo1",
         price: 1,
-        imgs: [""],
+        images: [""],
       },
       {
         name: "foo2",
         price: 2,
-        imgs: [""],
+        images: [""],
       },
       {
         name: "foo3",
         price: 3,
-        imgs: [""],
+        images: [""],
       },
     ],
   },
@@ -33,7 +33,7 @@ const fakeData = [
       {
         name: "bar1",
         price: 1,
-        imgs: [""],
+        images: [""],
       },
     ],
   },
