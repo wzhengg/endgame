@@ -10,9 +10,9 @@ jest.mock("../CarouselArrow/CarouselArrow", () => () => (
 ));
 
 const data = [
-  { name: "product 1", description: "desc", image: "" },
-  { name: "product 2", description: "desc", image: "" },
-  { name: "product 3", description: "desc", image: "" },
+  { id: "1", name: "product 1", description: "desc", image: "" },
+  { id: "2", name: "product 2", description: "desc", image: "" },
+  { id: "3", name: "product 3", description: "desc", image: "" },
 ];
 
 describe("featured products carousel", () => {
