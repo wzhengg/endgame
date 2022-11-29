@@ -6,6 +6,7 @@ import ProductCaption from "../ProductCaption/ProductCaption";
 
 type CarouselProps = {
   data: {
+    id: string;
     name: string;
     description: string;
     image: string;
@@ -34,10 +35,10 @@ const ProductCarousel = ({ data }: CarouselProps) => {
         className="absolute left-1/2 translate-x-[-50%] bottom-3 flex gap-2"
         data-testid="indicators"
       >
-        {data.map((_imgs, i) => (
+        {data.map((obj, i) => (
           <button
             type="button"
-            key={i}
+            key={obj.id}
             onClick={() => goToImg(i)}
             className="w-6 h-6"
           >
