@@ -1,16 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase-config";
-
-class Product {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly price: number,
-    readonly category: string,
-    readonly images: string[]
-  ) {}
-}
+import { Product, getProducts } from "../../api/products";
 
 const ProductsLayout = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,30 +10,8 @@ const ProductsLayout = () => {
     []
   );
 
-  const getProducts = async () => {
-    try {
-      const newProducts: Product[] = [];
-      const querySnapshot = await getDocs(collection(db, "products"));
-      querySnapshot.forEach((doc) => {
-        const product = doc.data();
-        newProducts.push(
-          new Product(
-            doc.id,
-            product.name,
-            product.price,
-            product.category,
-            product.images
-          )
-        );
-      });
-      setProducts(newProducts);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
-    getProducts();
+    getProducts().then((data) => setProducts(data));
   }, []);
 
   return (
