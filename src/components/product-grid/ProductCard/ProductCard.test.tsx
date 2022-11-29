@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 const fakeProduct = {
   name: "foo",
   price: 5.0,
-  imgs: [""],
+  images: [""],
 };
 
 describe("product card", () => {
