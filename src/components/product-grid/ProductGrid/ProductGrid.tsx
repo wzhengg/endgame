@@ -7,7 +7,7 @@ type GridProps = {
     products: {
       name: string;
       price: number;
-      imgs: string[];
+      images: string[];
     }[];
   }[];
 };
@@ -21,7 +21,7 @@ const ProductGrid = ({ data }: GridProps) => {
     []
   );
 
-  return (
+  return data.length !== 0 ? (
     <div className="flex flex-col items-center mx-80 my-20">
       <h3 className="text-base font-semibold tracking-widest text-gray-600 mb-6">
         FEATURED COLLECTIONS
@@ -47,7 +47,7 @@ const ProductGrid = ({ data }: GridProps) => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ProductGrid;
