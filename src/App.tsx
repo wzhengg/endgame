@@ -5,14 +5,17 @@ import "./App.scss";
 import ProductGrid from "./components/product-grid/ProductGrid/ProductGrid";
 import { products } from "./components/product-grid/FeaturedProducts";
 import Footer from "./components/Footer/Footer";
-import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config";
 
-type CarouselObject = {
-  name: string;
-  description: string;
-  image: string;
-};
+class CarouselObject {
+  constructor(
+    readonly id: string,
+    readonly name: string,
+    readonly description: string,
+    readonly image: string
+  ) {}
+}
 
 function App() {
   const [carouselData, setCarouselData] = useState<CarouselObject[]>([]);
@@ -20,11 +23,12 @@ function App() {
   const getCarouselData = async () => {
     try {
       const newCarouselData: CarouselObject[] = [];
-      const querySnapshot = (await getDocs(
-        collection(db, "carousel-data")
-      )) as QuerySnapshot<{ name: string; description: string; image: string }>;
+      const querySnapshot = await getDocs(collection(db, "carousel-data"));
       querySnapshot.forEach((doc) => {
-        newCarouselData.push(doc.data());
+        const data = doc.data();
+        newCarouselData.push(
+          new CarouselObject(doc.id, data.name, data.description, data.image)
+        );
       });
       setCarouselData(newCarouselData);
     } catch (err) {
