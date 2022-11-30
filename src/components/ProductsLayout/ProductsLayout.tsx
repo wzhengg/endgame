@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Product, getProducts } from "../../api/products";
-import ProductCard from "../product-grid/ProductCard/ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 
 const ProductsLayout = () => {
   const [products, setProducts] = useState<Product[]>([]);

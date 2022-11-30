@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ProductCarousel from "../carousel/ProductCarousel/ProductCarousel";
-import ProductGrid from "../product-grid/ProductGrid/ProductGrid";
+import ProductGrid from "../ProductGrid/ProductGrid";
 import {
   CarouselObject,
   CollectionObject,
