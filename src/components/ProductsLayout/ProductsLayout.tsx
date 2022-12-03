@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, ChangeEvent } from "react";
 import { Product, getProducts } from "../../api/products";
+import ProductFilters from "../ProductFilters/ProductFilters";
 import ProductCard from "../ProductCard/ProductCard";
 
 const ProductsLayout = () => {
@@ -66,92 +67,14 @@ const ProductsLayout = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-20">
-      <form>
-        <div>
-          <input
-            type="checkbox"
-            id="keyboards"
-            name="category"
-            value="keyboards"
-            onChange={(e) => onCategoryChange(e)}
-          />
-          <label htmlFor="keyboards">Keyboards</label>
-          <input
-            type="checkbox"
-            id="switches"
-            name="category"
-            value="switches"
-            onChange={(e) => onCategoryChange(e)}
-          />
-          <label htmlFor="switches">Switches</label>
-          <input
-            type="checkbox"
-            id="accessories"
-            name="category"
-            value="accessories"
-            onChange={(e) => onCategoryChange(e)}
-          />
-          <label htmlFor="accessories">Accessories</label>
-        </div>
-        <div>
-          <input
-            type="number"
-            min={0}
-            id="maxPrice"
-            name="maxPrice"
-            onChange={(e) => onMaxPriceChange(e)}
-          />
-          <label htmlFor="maxPrice">Max price</label>
-        </div>
-        <fieldset>
-          <legend>Sort by</legend>
-          <div>
-            <input
-              type="radio"
-              id="AZ"
-              name="sort"
-              value="AZ"
-              onChange={(e) => onSortChange(e)}
-            />
-            <label htmlFor="AZ">Alphabetically, A-Z</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="ZA"
-              name="sort"
-              value="ZA"
-              onChange={(e) => onSortChange(e)}
-            />
-            <label htmlFor="ZA">Alphabetically, Z-A</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="priceAscending"
-              name="sort"
-              value="priceAscending"
-              onChange={(e) => onSortChange(e)}
-            />
-            <label htmlFor="priceAscending">Price, low to high</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="priceDescending"
-              name="sort"
-              value="priceDescending"
-              onChange={(e) => onSortChange(e)}
-            />
-            <label htmlFor="priceDescending">Price, high to low</label>
-          </div>
-        </fieldset>
-        <button type="reset" onClick={resetFilters}>
-          Clear
-        </button>
-      </form>
-      <div className="grid grid-cols-5 gap-6">
+    <div className="bg-gray-100 p-10 grid grid-cols-5 gap-10">
+      <ProductFilters
+        onCategoryChange={onCategoryChange}
+        onMaxPriceChange={onMaxPriceChange}
+        onSortChange={onSortChange}
+        resetFilters={resetFilters}
+      />
+      <div className="col-span-4 grid grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <ProductCard
             product={product}
