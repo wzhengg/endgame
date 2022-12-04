@@ -6,6 +6,7 @@ import ProductCard from "../ProductCard/ProductCard";
 const ProductsLayout = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState({
+    query: "",
     categories: new Set(),
     maxPrice: -1,
     sort: "",
@@ -24,6 +25,9 @@ const ProductsLayout = () => {
   const filteredProducts = useMemo(() => {
     const newProducts = products.filter(
       (product) =>
+        (filters.query.length === 0
+          ? true
+          : product.name.toLowerCase().includes(filters.query.toLowerCase())) &&
         (filters.categories.size === 0
           ? true
           : filters.categories.has(product.category)) &&
@@ -42,6 +46,13 @@ const ProductsLayout = () => {
 
     return newProducts;
   }, [products, filters]);
+
+  const onQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilters((prev) => ({
+      ...prev,
+      query: e.target.value,
+    }));
+  };
 
   const onCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newCategories = new Set();
@@ -63,25 +74,38 @@ const ProductsLayout = () => {
   };
 
   const resetFilters = () => {
-    setFilters({ categories: new Set(), maxPrice: -1, sort: "" });
+    setFilters({ query: "", categories: new Set(), maxPrice: -1, sort: "" });
   };
 
   return (
-    <div className="bg-gray-100 p-10 grid grid-cols-5 gap-10">
-      <ProductFilters
-        onCategoryChange={onCategoryChange}
-        onMaxPriceChange={onMaxPriceChange}
-        onSortChange={onSortChange}
-        resetFilters={resetFilters}
-      />
-      <div className="col-span-4 grid grid-cols-4 gap-6">
-        {filteredProducts.map((product) => (
-          <ProductCard
-            product={product}
-            formatter={formatter}
-            key={product.id}
-          />
-        ))}
+    <div className="bg-gray-100 p-10">
+      <div className="mb-10">
+        <input
+          type="text"
+          id="search"
+          placeholder="SEARCH"
+          value={filters.query}
+          onChange={(e) => onQueryChange(e)}
+          className="w-full px-4 py-2 tracking-wide"
+        />
+        <label htmlFor="search"></label>
+      </div>
+      <div className="grid grid-cols-5 gap-10">
+        <ProductFilters
+          onCategoryChange={onCategoryChange}
+          onMaxPriceChange={onMaxPriceChange}
+          onSortChange={onSortChange}
+          resetFilters={resetFilters}
+        />
+        <div className="col-span-4 grid grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              product={product}
+              formatter={formatter}
+              key={product.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
