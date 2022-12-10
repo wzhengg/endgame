@@ -6,16 +6,23 @@ import App from "./App";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import reportWebVitals from "./reportWebVitals";
 import ProductsLayout from "./components/ProductsLayout/ProductsLayout";
+import HomeLayout from "./components/HomeLayout/HomeLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/products",
-    element: <ProductsLayout />,
+    children: [
+      {
+        path: "",
+        element: <HomeLayout />,
+      },
+      {
+        path: "/products",
+        element: <ProductsLayout />,
+      },
+    ],
   },
 ]);
 
