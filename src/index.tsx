@@ -7,6 +7,8 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import reportWebVitals from "./reportWebVitals";
 import ProductsLayout from "./components/ProductsLayout/ProductsLayout";
 import HomeLayout from "./components/HomeLayout/HomeLayout";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductsLayout />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
