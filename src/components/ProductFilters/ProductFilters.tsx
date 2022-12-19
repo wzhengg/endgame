@@ -51,7 +51,7 @@ const ProductFilters = (props: Props) => {
       </div>
       <div className="flex flex-col">
         <h3 className="font-bold mb-2">MAX PRICE</h3>
-        <div className="flex">
+        <div className="flex items-center">
           <label htmlFor="maxPrice" className="mr-2">
             $
           </label>
@@ -61,6 +61,7 @@ const ProductFilters = (props: Props) => {
             id="maxPrice"
             name="maxPrice"
             onChange={(e) => onMaxPriceChange(e)}
+            className="tracking-wide border border-gray-500 px-2 py-1"
           />
         </div>
       </div>
@@ -114,7 +115,7 @@ const ProductFilters = (props: Props) => {
       <button
         type="reset"
         onClick={resetFilters}
-        className="text-sm tracking-widest bg-white py-2"
+        className="text-sm tracking-widest bg-white py-2 border border-gray-500"
       >
         CLEAR
       </button>
