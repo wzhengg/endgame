@@ -1,6 +1,12 @@
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const Register = () => {
   const [createAccountError, setCreateAccountError] = useState(false);
@@ -11,6 +17,8 @@ const Register = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
@@ -19,16 +27,29 @@ const Register = () => {
   };
 
   const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigate("/profile");
+    }
+  });
+
   const createUser = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
 
-      console.log(user);
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          displayName: `${formData.firstName} ${formData.lastName}`,
+        });
+      }
+
       setCreateAccountError(false);
+      navigate("/profile");
     } catch (err) {
       console.log(err);
       setCreateAccountError(true);
@@ -75,7 +96,7 @@ const Register = () => {
           />
           <button
             onClick={(e) => {
-              // e.preventDefault();
+              e.preventDefault();
               createUser();
             }}
             className="tracking-widest text-sm font-semibold w-full py-2 border-2 border-gray-700"
