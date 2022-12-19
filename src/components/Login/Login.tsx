@@ -1,6 +1,10 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [signInError, setSignInError] = useState(false);
@@ -8,6 +12,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -17,16 +23,17 @@ const Login = () => {
   };
 
   const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigate("/profile");
+    }
+  });
+
   const signIn = async () => {
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-
-      console.log(user);
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
       setSignInError(false);
+      navigate("/profile");
     } catch (err) {
       console.log(err);
       setSignInError(true);
@@ -56,7 +63,7 @@ const Login = () => {
           />
           <button
             onClick={(e) => {
-              // e.preventDefault();
+              e.preventDefault();
               signIn();
             }}
             className="tracking-widest text-sm font-semibold w-full py-2 border-2 border-gray-700"
