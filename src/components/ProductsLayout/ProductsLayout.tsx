@@ -78,7 +78,7 @@ const ProductsLayout = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-10">
+    <div className="bg-gray-100 p-10 flex-grow">
       <div className="mb-10">
         <input
           type="text"
@@ -86,7 +86,7 @@ const ProductsLayout = () => {
           placeholder="SEARCH"
           value={filters.query}
           onChange={(e) => onQueryChange(e)}
-          className="w-full px-4 py-2 tracking-wide"
+          className="w-full px-4 py-2 tracking-wide border-2 border-gray-400"
         />
         <label htmlFor="search"></label>
       </div>
