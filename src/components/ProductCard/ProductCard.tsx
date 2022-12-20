@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 type Props = {
   product: {
+    id: string;
     name: string;
     price: number;
     images: string[];
@@ -8,8 +11,13 @@ type Props = {
 };
 
 const ProductCard = ({ product, formatter }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center gap-4 cursor-pointer bg-white pb-6">
+    <div
+      onClick={() => navigate(`/products/${product.id}`)}
+      className="flex flex-col items-center gap-4 cursor-pointer bg-white pb-6"
+    >
       <img
         src={product.images[0]}
         alt=""
