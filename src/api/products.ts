@@ -41,7 +41,7 @@ export async function getCarouselData() {
     querySnapshot.forEach((doc) => {
       const data = doc.data();
       newCarouselData.push(
-        new CarouselObject(doc.id, data.name, data.description, data.image)
+        new CarouselObject(data.id, data.name, data.description, data.image)
       );
     });
   } catch (err) {
