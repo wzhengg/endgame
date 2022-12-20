@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import ProductCaption from "./ProductCaption";
 
 const fakeProduct = {
+  id: "1",
   name: "foo",
   description: "bar",
 };
