@@ -10,6 +10,7 @@ import HomeLayout from "./components/HomeLayout/HomeLayout";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import ProductPage from "./components/ProductPage/ProductPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductsLayout />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductPage />,
       },
       {
         path: "/login",
