@@ -5,6 +5,7 @@ type GridProps = {
   data: {
     category: string;
     products: {
+      id: string;
       name: string;
       price: number;
       images: string[];
