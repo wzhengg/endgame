@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 export class CarouselObject {
@@ -14,7 +14,12 @@ export class CollectionObject {
   constructor(
     readonly id: string,
     readonly category: string,
-    readonly products: { name: string; price: number; images: string[] }[]
+    readonly products: {
+      id: string;
+      name: string;
+      price: number;
+      images: string[];
+    }[]
   ) {}
 }
 
@@ -86,4 +91,20 @@ export async function getProducts() {
   }
 
   return newProducts;
+}
+
+export async function getProduct(id: string) {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+  const product = docSnap.data();
+
+  return product
+    ? new Product(
+        id,
+        product.name,
+        product.price,
+        product.category,
+        product.images
+      )
+    : null;
 }
