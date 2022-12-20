@@ -11,16 +11,19 @@ const fakeData = [
     category: "foo",
     products: [
       {
+        id: "1",
         name: "foo1",
         price: 1,
         images: [""],
       },
       {
+        id: "2",
         name: "foo2",
         price: 2,
         images: [""],
       },
       {
+        id: "3",
         name: "foo3",
         price: 3,
         images: [""],
@@ -31,6 +34,7 @@ const fakeData = [
     category: "bar",
     products: [
       {
+        id: "4",
         name: "bar1",
         price: 1,
         images: [""],
