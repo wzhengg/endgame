@@ -33,7 +33,9 @@ const Header = () => {
         <Link to={user ? "profile" : "login"}>
           <img src={AccountIcon} alt="" className="w-6" />
         </Link>
-        <img src={CartIcon} alt="" className="w-6" />
+        <Link to="cart">
+          <img src={CartIcon} alt="" className="w-6" />
+        </Link>
       </div>
     </nav>
   );
