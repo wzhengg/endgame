@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { Product, getProduct } from "../../api/products";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useCart } from "../../App";
 
 const ProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
+  const { cart, setCart } = useCart();
 
   const formatter = useMemo(
     () =>
@@ -69,6 +71,9 @@ const ProductPage = () => {
         </div>
         <button
           type="button"
+          onClick={() => {
+            setCart((prev) => [...prev, { product, quantity }]);
+          }}
           className="border-2 border-gray-600 py-4 font-medium tracking-wider"
         >
           ADD TO CART
