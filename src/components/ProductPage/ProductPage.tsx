@@ -72,7 +72,20 @@ const ProductPage = () => {
         <button
           type="button"
           onClick={() => {
-            setCart((prev) => [...prev, { product, quantity }]);
+            const productIndex = cart.findIndex(
+              (obj) => obj.product.id === product.id
+            );
+
+            if (productIndex < 0) {
+              setCart((prev) => [...prev, { product, quantity }]);
+              return;
+            }
+
+            const newQuantity = cart[productIndex].quantity + quantity;
+            const newCart = cart.map((item, index) =>
+              index === productIndex ? { ...item, quantity: newQuantity } : item
+            );
+            setCart(newCart);
           }}
           className="border-2 border-gray-600 py-4 font-medium tracking-wider"
         >
