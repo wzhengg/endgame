@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
 import AccountIcon from "../../assets/icons/account-outline.svg";
@@ -7,14 +7,16 @@ import CartIcon from "../../assets/icons/cart-outline.svg";
 const Header = () => {
   const [user, setUser] = useState<User | null>(null);
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-    } else {
-      setUser(null);
-    }
-  });
+  const auth = useMemo(() => getAuth(), []);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, [auth]);
 
   return (
     <nav className="flex justify-between items-center px-9">

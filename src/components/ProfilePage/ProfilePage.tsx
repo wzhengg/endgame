@@ -1,5 +1,5 @@
 import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -7,15 +7,17 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-    } else {
-      setUser(null);
-    }
-    setIsLoading(false);
-  });
+  const auth = useMemo(() => getAuth(), []);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+      setIsLoading(false);
+    });
+  }, [auth]);
 
   useEffect(() => {
     if (!isLoading && !user) {
