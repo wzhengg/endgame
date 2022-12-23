@@ -73,11 +73,11 @@ const ProductPage = () => {
           type="button"
           onClick={() => {
             const productIndex = cart.findIndex(
-              (obj) => obj.product.id === product.id
+              (obj) => obj.productId === product.id
             );
 
             if (productIndex < 0) {
-              setCart((prev) => [...prev, { product, quantity }]);
+              setCart((prev) => [...prev, { productId: product.id, quantity }]);
               return;
             }
 
