@@ -1,29 +1,18 @@
-import { User, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useMemo, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
+import { useContext, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const user = useContext(UserContext);
   const navigate = useNavigate();
-
   const auth = useMemo(() => getAuth(), []);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
-  }, [auth]);
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!user) {
       navigate("/login");
     }
-  });
+  }, [user, navigate]);
 
   return user ? (
     <div className="flex-grow flex flex-col items-center gap-8 py-20">
@@ -33,7 +22,6 @@ const ProfilePage = () => {
       <button
         onClick={() => {
           signOut(auth);
-          setUser(null);
         }}
         className="text-sm text-gray-600 tracking-widest border-2 border-gray-500 px-6 py-4"
       >
