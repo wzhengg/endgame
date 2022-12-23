@@ -1,14 +1,13 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   updateProfile,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import { UserContext } from "../../App";
 
 const Register = () => {
   const [createAccountError, setCreateAccountError] = useState(false);
@@ -19,17 +18,15 @@ const Register = () => {
     password: "",
   });
 
+  const user = useContext(UserContext);
   const navigate = useNavigate();
-
   const auth = useMemo(() => getAuth(), []);
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // console.log("navigated from listener");
-        setTimeout(() => navigate("/profile"), 500);
-      }
-    });
-  }, [auth, navigate]);
+    if (user) {
+      setTimeout(() => navigate("/profile"), 500);
+    }
+  }, [user, navigate]);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -45,13 +42,11 @@ const Register = () => {
         formData.email,
         formData.password
       );
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
 
       if (auth.currentUser) {
         updateProfile(auth.currentUser, {
           displayName: `${formData.firstName} ${formData.lastName}`,
         });
-
         await setDoc(doc(db, "users", auth.currentUser.uid), {
           cart: [],
         });
