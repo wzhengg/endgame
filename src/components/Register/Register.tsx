@@ -7,6 +7,8 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 const Register = () => {
   const [createAccountError, setCreateAccountError] = useState(false);
@@ -23,7 +25,8 @@ const Register = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("/profile");
+        // console.log("navigated from listener");
+        setTimeout(() => navigate("/profile"), 500);
       }
     });
   }, [auth, navigate]);
@@ -48,10 +51,13 @@ const Register = () => {
         updateProfile(auth.currentUser, {
           displayName: `${formData.firstName} ${formData.lastName}`,
         });
+
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+          cart: [],
+        });
       }
 
       setCreateAccountError(false);
-      navigate("/profile");
     } catch (err) {
       console.log(err);
       setCreateAccountError(true);
