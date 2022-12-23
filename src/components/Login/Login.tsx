@@ -1,7 +1,8 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
+import { UserContext, useCart } from "../../App";
+import { getCart } from "../../api/cart";
 
 const Login = () => {
   const [signInError, setSignInError] = useState(false);
@@ -11,6 +12,7 @@ const Login = () => {
   });
 
   const user = useContext(UserContext);
+  const { setCart } = useCart();
   const navigate = useNavigate();
   const auth = useMemo(() => getAuth(), []);
 
@@ -31,6 +33,10 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       setSignInError(false);
+
+      const cart = await getCart(auth.currentUser!.uid);
+      setCart(cart);
+
       navigate("/profile");
     } catch (err) {
       console.log(err);
