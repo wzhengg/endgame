@@ -10,15 +10,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Product } from "./api/products";
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { CartItem } from "./api/cart";
 
 export const UserContext = createContext<User | null>(null);
-
-export type CartItem = {
-  product: Product;
-  quantity: number;
-};
 
 type CartContext = {
   cart: CartItem[];
