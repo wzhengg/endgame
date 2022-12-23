@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Product, getProduct } from "../../api/products";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useCart } from "../../App";
@@ -8,6 +8,7 @@ const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const { cart, setCart } = useCart();
+  const navigate = useNavigate();
 
   const formatter = useMemo(
     () =>
@@ -86,6 +87,8 @@ const ProductPage = () => {
               index === productIndex ? { ...item, quantity: newQuantity } : item
             );
             setCart(newCart);
+
+            navigate("/cart");
           }}
           className="border-2 border-gray-600 py-4 font-medium tracking-wider"
         >
