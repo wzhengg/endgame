@@ -1,10 +1,7 @@
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 const Login = () => {
   const [signInError, setSignInError] = useState(false);
@@ -13,16 +10,15 @@ const Login = () => {
     password: "",
   });
 
+  const user = useContext(UserContext);
   const navigate = useNavigate();
-
   const auth = useMemo(() => getAuth(), []);
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigate("/profile");
-      }
-    });
-  }, [auth, navigate]);
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user, navigate]);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
